@@ -15,7 +15,7 @@ window.onbeforeunload = function () {
 window.setTimeout(() => {
 	var b = document.getElementById('myblock');
 	b.setAttribute('class', 'hide');
-}, 2000);
+}, 1000);
 const controller = new AbortController();
 const { signal } = controller;
 
@@ -56,14 +56,15 @@ async function getdata() {
 		);
 	});
 }
-function resetInput() {
-	let title = document.getElementById('title');
-	let year = document.getElementById('year');
-	title.style.backgroundColor = 'red';
-	year.style.backgroundColor = 'red';
-	title.value = '';
-	year.value = '';
-}
+// function resetInput() {
+// 	let title = document.getElementById('title');
+// 	let year = document.getElementById('year');
+// 	// title.style.backgroundColor = 'red';
+// 	// year.style.backgroundColor = 'red';
+// 	title.value = '';
+// 	year.value = '';
+// }
+
 const tb = document.getElementById('search-by-title-button');
 tb.addEventListener('click', getdata);
 const yb = document.getElementById('year');
