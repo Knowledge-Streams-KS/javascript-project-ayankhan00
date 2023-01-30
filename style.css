@@ -123,14 +123,18 @@ img {
 }
 
 .pop {
+    background-color: #ffffff;
+    color: #000000;
+    font-size: 3rem;
+    font-weight: 700;
     display: block;
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     border: 1px solid black;
-    background: white;
-    padding: 10px;
+    border-radius: 10px;
+    padding: 50px 100px;
     justify-content: center;
 }
 

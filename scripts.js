@@ -1,5 +1,5 @@
 /** @format */
-
+// search-by-title-reset
 window.onload = function () {
 	let mydata = localStorage.getItem('mydata');
 	if (mydata) {
@@ -23,16 +23,19 @@ async function getdata() {
 	let movied = document.getElementById('response-title');
 	movied.innerHTML = '';
 
-	let name = document.getElementById('title').value;
+	let title = document.getElementById('title').value;
 	let year = document.getElementById('year').value;
 
-	if (!name) {
+	if (!title) {
 		return;
 	}
 
-	const x = await fetch(`http://www.omdbapi.com/?s=${name}&apikey=9b061cb2`, {
-		signal,
-	});
+	const x = await fetch(
+		`http://www.omdbapi.com/?s=${title}&apikey=4714ea0f`,
+		{
+			signal,
+		},
+	);
 	let data = await x.json();
 	let arrdata = data['Search'];
 	if (year) {
@@ -53,7 +56,14 @@ async function getdata() {
 		);
 	});
 }
-
+function resetInput() {
+	let title = document.getElementById('title');
+	let year = document.getElementById('year');
+	title.style.backgroundColor = 'red';
+	year.style.backgroundColor = 'red';
+	title.value = '';
+	year.value = '';
+}
 const tb = document.getElementById('search-by-title-button');
 tb.addEventListener('click', getdata);
 const yb = document.getElementById('year');
