@@ -2,15 +2,21 @@
 // search-by-title-reset
 window.onload = function () {
 	let mydata = localStorage.getItem('mydata');
+	let mydata2 = localStorage.getItem('myobject');
 	if (mydata) {
-		let movied = document.getElementById('response-title');
-		movied.innerHTML = mydata;
+		// movied.innerHTML = mydata;
+		displayDiv(JSON.parse(mydata2));
+	} else if (mydata2) {
+		displayDiv(mydata2);
 	}
 	sessionStorage.clear();
 };
 window.onbeforeunload = function () {
 	let movied = document.getElementById('response-title').innerHTML;
+	const myJSON = JSON.stringify(arrdata);
+	console.log(myJSON);
 	localStorage.setItem('mydata', movied);
+	localStorage.setItem('myobject', myJSON);
 };
 window.setTimeout(() => {
 	var b = document.getElementById('myblock');
@@ -37,12 +43,31 @@ async function getdata() {
 		},
 	);
 	let data = await x.json();
-	let arrdata = data['Search'];
+	arrdata = data['Search'];
 	if (year) {
 		arrdata = arrdata.filter((m) => year <= m['Year']);
 	}
-	arrdata.forEach((element) => {
-		movied.insertAdjacentHTML(
+	displayDiv(arrdata);
+	// console.log(arrdata);
+	// arrdata.forEach((element) => {
+	// 	movied.insertAdjacentHTML(
+	// 		'afterbegin',
+	// 		`<li class="cards_item">
+	//                 <div class="card">
+	//                     <div class="card_image"><img src="${element['Poster']}"></div>
+	//                     <div class="card_content">
+	//                         <h2 class="card_title">${element['Title']}</h2>
+	//                         <p class="card_text">${element['Year']}</p>
+	//                     </div>
+	//                 </div>
+	//             </li>`,
+	// 	);
+	// });
+}
+
+function displayDiv(arg) {
+	arg.forEach((element) => {
+		res.insertAdjacentHTML(
 			'afterbegin',
 			`<li class="cards_item">
                     <div class="card">
@@ -69,3 +94,6 @@ const tb = document.getElementById('search-by-title-button');
 tb.addEventListener('click', getdata);
 const yb = document.getElementById('year');
 yb.addEventListener('keyup', getdata);
+let movied = document.getElementById('response-title');
+let res = document.getElementById('response-title');
+let arrdata;
